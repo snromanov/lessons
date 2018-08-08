@@ -15,9 +15,14 @@ public class MyFirstProgram {
     r.b = 6;
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
 
-Point
-    System.out.println();
 
+    //Домашнее задание  №2
+
+    System.out.println("Расстояние  между  двумя  точками");
+
+
+  }
+  public static double distance(Point p1, Point p2){
 
   }
 
