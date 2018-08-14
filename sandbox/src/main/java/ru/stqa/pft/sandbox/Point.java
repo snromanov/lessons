@@ -9,13 +9,7 @@ public class Point {
   }
 
 
-  public double getX() {
-    return x;
-  }
-
-  public  double getY() {
-    return y;
-  }
+ 
 
     //Вводим функцию
     public static double distance(Point p1, Point p2) {
