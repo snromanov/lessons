@@ -16,6 +16,11 @@ public class MyFirstProgram {
         //Используем  метод
         System.out.println("Расстояние между  двумя точками p1 и p2 = " + p1.distance(p2));
 
+
+
+
+
+
         //площадь квадрата
         Square s = new Square(5);
         s.l = 5;
