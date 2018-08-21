@@ -23,6 +23,10 @@ public class AbonentCreationTests {
         wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true));
         wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         wd.get("http://localhost/addressbook/index.php");
+        login();
+    }
+
+    private void login() {
         wd.findElement(By.name("pass")).click();
         wd.findElement(By.name("pass")).sendKeys("\\undefined");
         wd.findElement(By.name("user")).click();
@@ -34,10 +38,19 @@ public class AbonentCreationTests {
         wd.findElement(By.name("pass")).sendKeys("secret");
         wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
     }
-    
+
     @Test
     public void AbonentCreationTests() {
-        wd.findElement(By.linkText("add new")).click();
+        initAbonentCreation();
+        fillAbonentForm();
+        returnAbonentPage();
+    }
+
+    private void returnAbonentPage() {
+        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+    }
+
+    private void fillAbonentForm() {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys("Vasiliy");
@@ -50,9 +63,13 @@ public class AbonentCreationTests {
         wd.findElement(By.name("email")).click();
         wd.findElement(By.name("email")).clear();
         wd.findElement(By.name("email")).sendKeys("ma@mail.ru");
-        wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
-    
+
+
+    private void initAbonentCreation() {
+        wd.findElement(By.linkText("add new")).click();
+    }
+
     @AfterMethod
     public void tearDown() {
         wd.quit();
