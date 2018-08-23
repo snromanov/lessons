@@ -3,30 +3,15 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="0.0" y="356.0">ru.stqa.pft.addressbook.GroupCreationTests</node>
-    <node x="90.5" y="0.0">ru.stqa.pft.addressbook.TestBase</node>
-    <node x="245.0" y="345.0">ru.stqa.pft.addressbook.GroupDeletionTests</node>
+    <node x="0.0" y="0.0">ru.stqa.pft.addressbook.appmanager.ApplicationManager</node>
+    <node x="0.0" y="317.0">ru.stqa.pft.addressbook.model.GroupData</node>
+    <node x="230.0" y="317.0">ru.stqa.pft.addressbook.tests.TestBase</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="ru.stqa.pft.addressbook.GroupCreationTests" target="ru.stqa.pft.addressbook.TestBase">
-      <point x="56.25" y="-26.0" />
-      <point x="168.75" y="320.0" />
-      <point x="201.875" y="320.0" />
-      <point x="-37.125" y="147.5" />
-    </edge>
-    <edge source="ru.stqa.pft.addressbook.GroupDeletionTests" target="ru.stqa.pft.addressbook.TestBase">
-      <point x="-64.25" y="-37.0" />
-      <point x="309.25" y="320.0" />
-      <point x="276.125" y="320.0" />
-      <point x="37.125" y="147.5" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="0.0" y="0.0" />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0" x="684.5" y="265.5" />
   <SelectedNodes />
   <Categories>
-    <Category>Fields</Category>
-    <Category>Constructors</Category>
     <Category>Methods</Category>
   </Categories>
   <SCOPE>All</SCOPE>
