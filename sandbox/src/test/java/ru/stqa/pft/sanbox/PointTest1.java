@@ -6,19 +6,17 @@ import ru.stqa.pft.sandbox.Point;
 public class PointTest1 {
 
 
-    @Test
+  @Test
 
-    public void testDoubleDistance () {
+  public void testDoubleDistance () {
 
-      Point p1 = new Point(2, 4);
-      Point p2 = new Point(5, 8);
-
-
-      assert  p1.distance(p2) == 5.0;
+    Point p1 = new Point(2, 4);
+    Point p2 = new Point(5, 8);
 
 
-    }
+    assert  p1.distance(p2) == 5.0;
+
 
   }
 
-
+}
