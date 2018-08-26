@@ -1,4 +1,4 @@
-package ru.stqa.pft.addressbook;
+package ru.stqa.pft.addressbook.test;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -7,10 +7,11 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.ContactData;
 
 import java.util.concurrent.TimeUnit;
 
-public class AbonentCreationTests {
+public class AbonentCreationTests extends GroupHelper{
   FirefoxDriver wd;
 
   public static boolean isAlertPresent(FirefoxDriver wd) {
