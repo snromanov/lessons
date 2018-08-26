@@ -9,15 +9,15 @@ public class GroupDeletionTests extends TestBase {
     
     @Test
     public void testGroupDeletionTests() {
-        gotoGroupPage();
-        selectGroup();
-        deleteGroup();
-        returnToGroupPage();
+        app.gotoGroupPage();
+        app.selectGroup();
+        app.deleteGroup();
+        app.returnToGroupPage();
     }
 
     @AfterMethod
     public void tearDown() {
-        wd.quit();
+        app.wd.quit();
     }
 
 
