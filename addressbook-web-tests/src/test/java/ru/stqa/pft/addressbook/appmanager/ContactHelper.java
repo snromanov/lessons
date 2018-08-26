@@ -32,4 +32,6 @@ public void fillContactForm(ContactData contactData){
 public void selectContact(){
         wd.findElement(By.name("selected[]")).click();
         }
-        }
+
+
+}
