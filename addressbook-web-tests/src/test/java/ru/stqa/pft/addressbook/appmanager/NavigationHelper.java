@@ -13,4 +13,8 @@ public class NavigationHelper extends SessionHelper {
   public void gotoGroupPage() {
     click(By.linkText("groups"));
   }
+
+  public void gotoHome(){
+    click(By.linkText("home"));
+  }
 }

@@ -5,13 +5,18 @@ import org.testng.annotations.Test;
 public class AbonentDeletionTests extends TestBase {
 
 
+
   @Test
   public void ContactDeletionTests() {
-    app.getContactHelper().selectContact();
+
+
+    app.getContactHelper().Home();
+    app.getContactHelper().selectcontact();
     app.getContactHelper().deletecontact();
-    app.getContactHelper().returnConcactPage();
+    app.getContactHelper().closeAlertWindow();
+    app.getContactHelper().Home();
+
   }
-
-
 }
+
 
