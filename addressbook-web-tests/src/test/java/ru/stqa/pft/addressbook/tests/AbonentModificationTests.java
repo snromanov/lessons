@@ -11,7 +11,6 @@ public class AbonentModificationTests extends TestBase {
     app.getContactHelper().initContactModification();
     app.getContactHelper().changeFamily();
     app.getContactHelper().verifityUpdate();
-    app.getContactHelper().clickUpdate();
     app.getContactHelper().Home();
 
   }
