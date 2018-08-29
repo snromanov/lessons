@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +32,10 @@ public class ApplicationManager {
       wd = new ChromeDriver();
     } else if (browser == BrowserType.IE) {
       wd = new InternetExplorerDriver();
+    } else if (browser == BrowserType.SAFARI) {
+      wd = new SafariDriver();
     }
+
     wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
     groupHelper = new GroupHelper(wd);
