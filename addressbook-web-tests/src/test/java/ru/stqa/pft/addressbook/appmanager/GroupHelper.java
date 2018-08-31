@@ -44,5 +44,18 @@ public class GroupHelper extends HelperBase {
   public void submitGroupModification() {
     click(By.name("update"));
   }
+
+  protected void typeone(By locator, String text) {
+    wd.findElement(locator).click();
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
+  }
+
+  public void initGroupModification() {
+    click(By.name("edit"));
+  }
+
 }
+
+
 
