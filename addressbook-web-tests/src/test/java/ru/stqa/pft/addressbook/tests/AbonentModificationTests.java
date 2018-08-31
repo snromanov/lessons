@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 public class AbonentModificationTests extends TestBase {
 
@@ -9,7 +10,7 @@ public class AbonentModificationTests extends TestBase {
     app.getContactHelper().Home();
     app.getContactHelper().selectcontact();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().changeFamily();
+    app.getContactHelper().fillContactForm(new ContactData("Пупкин", "Василий", "89500000000", "ma@mail.ru",null));
     app.getContactHelper().verifityUpdate();
     app.getContactHelper().Home();
 
