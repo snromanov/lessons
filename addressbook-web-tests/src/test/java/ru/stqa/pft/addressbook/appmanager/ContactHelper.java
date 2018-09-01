@@ -1,10 +1,8 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -25,12 +23,6 @@ public class ContactHelper extends HelperBase {
     typeone(By.name("lastname"), contactData.getSecondname());
     typeone(By.name("home"), contactData.getTelnumber());
     typeone(By.name("email"), contactData.getMail());
-
-    if (isElementPresent((By.name("new_group"))) {
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-  }
-
-  private void typeone(By lastname, String secondname) {
   }
 
   public void initContactCreation() {
@@ -62,15 +54,4 @@ public class ContactHelper extends HelperBase {
   click(By.xpath("//div[@id='content']/form[1]/input[22]"));}
 }
 
-    private boolean isElementPresent(By locator) {
-      try {wd.findElement(locator)};
-      return true;
-      catch (NoSuchElementException ex) {
-          return false;
-        }
-    }
-
-    private void typeone(By email, String mail) {
-    }
-}
 
