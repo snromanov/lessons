@@ -10,7 +10,7 @@ public class AbonentModificationTests extends TestBase {
     app.getContactHelper().Home();
     app.getContactHelper().selectcontact();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru",null));
+    app.getContactHelper().fillContactForm(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru",null),false);
     app.getContactHelper().verifityUpdate();
     app.getContactHelper().Home();
 
