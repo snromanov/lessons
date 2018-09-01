@@ -61,6 +61,15 @@ public class ContactHelper extends HelperBase {
   public void verifityUpdate() {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));
   }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createContact(ContactData contactData, boolean b) {
+    fillContactForm(contactData,b);
+    Home();
+  }
 }
 
 
