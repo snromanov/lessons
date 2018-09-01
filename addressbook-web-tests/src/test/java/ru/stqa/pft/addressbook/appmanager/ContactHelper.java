@@ -57,13 +57,6 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
   }
 
-  public void changeFamily() {
-    typeone(By.name("firstname"), "Иванов");
-  }
-
-  public void clickUpdate() {
-    click(By.linkText("Update"));
-  }
 
   public void verifityUpdate() {
     click(By.xpath("//div[@id='content']/form[1]/input[22]"));

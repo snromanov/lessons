@@ -12,7 +12,7 @@ public class AbonentCreationTests extends TestBase {
   public void contactCreationTests() {
     app.getContactHelper().initContactCreation();
     app.getContactHelper().fillContactForm(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru","test2"),true);
-    app.getContactHelper().returnConcactPage();
+    app.getNavigationHelper().gotoHome();
   }
 
 
