@@ -17,6 +17,8 @@ public class AbonentDeletionTests extends TestBase {
     app.getContactHelper().closeAlertWindow();
     app.getNavigationHelper().gotoHome();
 
+
+
   }
 }
 

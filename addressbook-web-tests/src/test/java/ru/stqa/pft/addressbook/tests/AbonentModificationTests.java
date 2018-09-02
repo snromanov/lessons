@@ -8,9 +8,12 @@ public class AbonentModificationTests extends TestBase {
   @Test
   public void ContactModificationTests() {
     app.getContactHelper().Home();
+    if (!app.getContactHelper().isThereAContact()){
+      app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
+    }
     app.getContactHelper().selectcontact();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru",null),false);
+    app.getContactHelper().fillContactForm(new ContactData("Пупкин", "Василий", "89500000001", "next@mail.ru",null),false);
     app.getContactHelper().verifityUpdate();
     app.getContactHelper().Home();
 

@@ -42,19 +42,19 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void selectcontact() {
-    {
-      wd.findElement(By.xpath("//div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).click();
-    }
-    ;
-  }
+  public void selectcontact()
+
+      {click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));}
+
+
+
 
   public void Home() {
     click(By.linkText("home"));
   }
 
   public void initContactModification() {
-    click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
   }
 
 
@@ -67,8 +67,10 @@ public class ContactHelper extends HelperBase {
   }
 
   public void createContact(ContactData contactData, boolean b) {
+    initContactCreation();
     fillContactForm(contactData,b);
     returnConcactPage();
+    Home();
   }
 }
 
