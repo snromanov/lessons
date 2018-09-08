@@ -86,7 +86,7 @@ public class ContactHelper extends HelperBase {
     List<WebElement> elements = wd.findElements( By.name( "entry" ) );
     for (WebElement element : elements){ // смотрим  все  строки  в  цикле
       List<WebElement> cells = element.findElements(By.tagName("td")); // получаем все строки с тегом td
-      String name = cells.get(3).getText(); // берем текст из нужного индекс
+      String name = cells.get(1).getText(); // берем текст из нужного индекс
       String lastname = cells.get(2).getText(); // берем  текст  из нужного индекса
       ContactData contact = new ContactData( name, lastname, null, null, null );   // создаем обект ContactGroupData и заполняем его значениями
       contacts.add( contact ); // добавляем новый  объект  в список
