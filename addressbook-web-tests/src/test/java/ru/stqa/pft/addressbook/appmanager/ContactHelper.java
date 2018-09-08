@@ -2,9 +2,13 @@ package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
@@ -43,11 +47,10 @@ public class ContactHelper extends HelperBase {
   }
 
 
-   // click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")); //брать первый  из списка
-    public void selectcontact(int index) {
-      wd.findElements ( By.name( "selected[]" ) ).get (index).click();
-    }
-
+  // click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")); //брать первый  из списка
+  public void selectcontact(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+  }
 
 
   public void Home() {
@@ -78,6 +81,17 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size(); // вернуть размер  элемента
   }
 
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements( By.name( "entry" ) );
+    for (WebElement element : elements){ // смотрим  все  строки  в  цикле
+      List<WebElement> cells = element.findElements(By.tagName("td")); // получаем все строки с тегом td
+      String name = cells.get(3).getText(); // берем текст из нужного индекс
+      String lastname = cells.get(2).getText(); // берем  текст  из нужного индекса
+      ContactData contact = new ContactData( name, lastname, null, null, null );   // создаем обект ContactGroupData и заполняем его значениями
+      contacts.add( contact ); // добавляем новый  объект  в список
+    }
+    return contacts;
+  }
 }
-
 
