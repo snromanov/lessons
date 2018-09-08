@@ -3,32 +3,32 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private  int id;
   private final String header;
   private final String body;
   private final String footer;
+  private int id;
 
-  public void setId(int id) {
+  public GroupData(String header, String body, String footer) {
+    this.id = Integer.MAX_VALUE;
+    this.header = header;
+    this.body = body;
+    this.footer = footer;
+  }
+
+
+  public GroupData(int id, String header, String body, String footer) {
     this.id = id;
+    this.header = header;
+    this.body = body;
+    this.footer = footer;
   }
 
   public int getId() {
     return id;
   }
 
-
-  public GroupData(String header, String body, String footer) {
-    this.id = 0 ;
-    this.header = header;
-    this.body = body;
-    this.footer = footer;
-  }
-
-  public GroupData(int id,String header, String body, String footer) {
-    this.id = id ;
-    this.header = header;
-    this.body = body;
-    this.footer = footer;
+  public void setId(int id) {
+    this.id = id;
   }
 
   public String getHeader() {
@@ -51,21 +51,18 @@ public class GroupData {
             '}';
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     GroupData groupData = (GroupData) o;
-    return id == groupData.id &&
-            Objects.equals(header, groupData.header);
+    return Objects.equals(header, groupData.header);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, header);
+    return Objects.hash(header);
   }
-
-
-
 
 }
