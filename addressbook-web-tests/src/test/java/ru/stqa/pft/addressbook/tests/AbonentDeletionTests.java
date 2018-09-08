@@ -14,7 +14,7 @@ public class AbonentDeletionTests extends TestBase {
     if (!app.getContactHelper().isThereAContact()){
       app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
     }
-    app.getContactHelper().selectcontact();
+    app.getContactHelper().selectcontact(before -1);
     app.getContactHelper().deletecontact();
     app.getContactHelper().closeAlertWindow();
     app.getNavigationHelper().gotoHome();
