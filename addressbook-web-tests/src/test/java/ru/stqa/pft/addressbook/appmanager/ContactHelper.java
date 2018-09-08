@@ -42,11 +42,9 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void selectcontact()
-
-      {click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));}
-
-
+  public void selectcontact() {
+    click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+  }
 
 
   public void Home() {
@@ -68,10 +66,15 @@ public class ContactHelper extends HelperBase {
 
   public void createContact(ContactData contactData, boolean b) {
     initContactCreation();
-    fillContactForm(contactData,b);
+    fillContactForm(contactData, b);
     returnConcactPage();
     Home();
   }
+
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size(); // вернуть размер  элемента
+  }
+
 }
 
 
