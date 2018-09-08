@@ -83,13 +83,13 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements( By.name( "entry" ) );
-    for (WebElement element : elements){ // смотрим  все  строки  в  цикле
-      List<WebElement> cells = element.findElements(By.tagName("td")); // получаем все строки с тегом td
-      String lastname = cells.get(1).getText(); // берем текст из нужного индекс
-      String name = cells.get(2).getText(); // берем  текст  из нужного индекса
-      ContactData contact = new ContactData( name, lastname, null, null, null );   // создаем обект ContactGroupData и заполняем его значениями
-      contacts.add( contact ); // добавляем новый  объект  в список
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
+    for (WebElement element : elements) {
+      String name = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String id = element.findElement(By.tagName("input")).getAttribute("value");
+              ContactData contact = new ContactData(id, name, lastname, null, null, null);
+      contacts.add(contact);
     }
     return contacts;
   }
