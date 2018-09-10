@@ -15,11 +15,11 @@ public class AbonentCreationTests extends TestBase {
   public void contactCreationTests() {
     app.getContactHelper().Home();
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
+    app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test0"), true);
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    before.add(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"));
+    before.add(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test0"));
 
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);
