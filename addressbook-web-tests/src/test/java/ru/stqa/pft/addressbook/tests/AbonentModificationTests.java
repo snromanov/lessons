@@ -17,7 +17,6 @@ public class AbonentModificationTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
     }
     List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectcontact(before.size() - 1);
     app.getContactHelper().initContactModification();
     app.getContactHelper().fillContactForm(new ContactData("Василий", "Пупкин", "89500000001", "next@mail.ru", null), false);
     app.getContactHelper().verifityUpdate();
