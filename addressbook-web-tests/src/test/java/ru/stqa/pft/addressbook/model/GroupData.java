@@ -3,11 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private final String header;
-  private final String body;
-  private final String footer;
-  private int id;
+  private  String header;
+  private  String body;
+  private  String footer;
+  private int id = Integer.MAX_VALUE;
 
+
+/* fluent  удаляем
   public GroupData(String header, String body, String footer) {
     this.id = Integer.MAX_VALUE;
     this.header = header;
@@ -22,13 +24,29 @@ public class GroupData {
     this.body = body;
     this.footer = footer;
   }
-
+*/
   public int getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public GroupData withHeader(String header) {
+    this.header = header;
+    return this;
+  }
+
+  public GroupData withBody(String body) {
+    this.body = body;
+    return this;
+  }
+
+  public GroupData withFooter(String footer) {
+    this.footer = footer;
+    return this;
   }
 
   public String getHeader() {

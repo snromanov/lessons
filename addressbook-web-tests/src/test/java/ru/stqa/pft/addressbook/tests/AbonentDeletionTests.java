@@ -19,7 +19,7 @@ public class AbonentDeletionTests extends TestBase {
     app.getContactHelper().selectcontact(before.size() - 1);
     app.getContactHelper().deletecontact();
     app.getContactHelper().closeAlertWindow();
-    app.getNavigationHelper().gotoHome();
+    app.goTo().gotoHome();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() - 1);
 

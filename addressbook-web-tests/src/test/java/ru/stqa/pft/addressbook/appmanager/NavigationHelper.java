@@ -11,7 +11,7 @@ public class NavigationHelper extends SessionHelper {
     super(wd);
   }
 
-  public void gotoGroupPage() {
+  public void GroupPage() {
     if (isElementPresent(By.tagName("h1"))
             && wd.findElement(By.tagName("h1")).getText().equals("Group")
             && isElementPresent(By.name("new"))){
