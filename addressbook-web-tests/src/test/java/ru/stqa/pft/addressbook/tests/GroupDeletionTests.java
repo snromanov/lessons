@@ -22,7 +22,7 @@ public class GroupDeletionTests extends TestBase {
 
   @Test
   public void testGroupDeletionTests() {
-    Groups before = app.group().all();
+    Groups before = app.group().all();// возращает объект типа groups
     GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
     Groups after = app.group().all();
