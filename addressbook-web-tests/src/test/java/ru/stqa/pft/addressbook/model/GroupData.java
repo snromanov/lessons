@@ -3,10 +3,9 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class GroupData {
-  private  String header;
-  private  String body;
-  private  String footer;
   private int id = Integer.MAX_VALUE;
+
+
 
 
 /* fluent  удаляем
@@ -62,6 +61,14 @@ public class GroupData {
   }
 
   @Override
+  public String toString() {
+    return "GroupData{" +
+            "id='" + id + '\'' +
+            ", header='" + header + '\'' +
+            '}';
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
@@ -72,16 +79,12 @@ public class GroupData {
 
   @Override
   public int hashCode() {
-    return Objects.hash(header, id);
+    return Objects.hash(id, header);
   }
 
-  @Override
-  public String toString() {
-    return "GroupData{" +
-            "id='" + id + '\'' +
-            ", header='" + header + '\'' +
-            '}';
-  }
+  private  String header;
+  private  String body;
+  private  String footer;
 
 
 }
