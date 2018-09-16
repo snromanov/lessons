@@ -13,18 +13,21 @@ public class AbonentModificationTests extends TestBase {
   public void ContactModificationTests() {
     app.getContactHelper().Home();
     if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
+      app.getContactHelper().createContact(new ContactData()
+              .withName("Терьентий").withSecondname("Терьентьтев").withTelnumber("89500000000").withMail("ma@mail.ru").withGroup("test0"), true);
     }
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().initContactModification(before.size() - 1);
-    app.getContactHelper().fillContactForm(new ContactData("Василий", "Пупкин", "89500000001", "next@mail.ru", null), false);
+    app.getContactHelper().fillContactForm(new ContactData()
+            .withName("Василий").withSecondname("Пупкин").withTelnumber("89500000001").withMail("next@mail.ru"), false);
     app.getContactHelper().verifityUpdate();
     app.getContactHelper().Home();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
 
     before.remove(before.size() - 1);
-    before.add(new ContactData("Василий", "Пупкин", "89500000001", "next@mail.ru", null));
+    before.add(new ContactData()
+            .withName("Василий").withSecondname("Пупкин").withTelnumber("89500000001").withMail("next@mail.ru"));
 
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);

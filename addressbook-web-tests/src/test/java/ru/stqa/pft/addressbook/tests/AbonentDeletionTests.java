@@ -13,7 +13,8 @@ public class AbonentDeletionTests extends TestBase {
   public void ContactDeletionTests() {
     app.getContactHelper().Home();
     if (!app.getContactHelper().isThereAContact()) {
-      app.getContactHelper().createContact(new ContactData("Терьентий", "Терьентьтев", "89500000000", "ma@mail.ru", "test2"), true);
+      app.getContactHelper().createContact(new ContactData()
+              .withName("Терьентий").withSecondname("Терьентьтев").withTelnumber("89500000000").withMail("ma@mail.ru").withGroup("test0"), true);
     }
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectcontact(before.size() - 1);

@@ -3,33 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private  int id;
-  private final String name;
-  private final String secondname;
-  private final String telnumber;
-  private final String mail;
+  private int id = Integer.MAX_VALUE;
+  private String name;
+  private String secondname;
+  private String telnumber;
+  private String mail;
   private String group;
 
-
-
-  public ContactData(String name, String secondname, String telnumber, String mail, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.secondname = secondname;
-    this.telnumber = telnumber;
-    this.mail = mail;
-    this.group = group;
-  }
-
-
-  public ContactData(int id, String name, String secondname, String telnumber, String mail, String group) {
-    this.id = id;
-    this.name = name;
-    this.secondname = secondname;
-    this.telnumber = telnumber;
-    this.mail = mail;
-    this.group = group;
-  }
 
   public String getName() {
     return name;
@@ -37,6 +17,36 @@ public class ContactData {
 
   public int getId() {
     return id;
+  }
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
+
+  public ContactData withName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public ContactData withSecondname(String secondname) {
+    this.secondname = secondname;
+    return this;
+  }
+
+  public ContactData withTelnumber(String telnumber) {
+    this.telnumber = telnumber;
+    return this;
+  }
+
+  public ContactData withMail(String mail) {
+    this.mail = mail;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
   }
 
   public String getSecondname() {
