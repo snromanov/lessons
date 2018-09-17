@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
@@ -22,6 +24,10 @@ public class ContactHelper extends HelperBase {
   public void deletecontact() {
     wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
   }
+
+  public void deleteContact(ContactData contact) {
+  }
+
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     typeone(By.name("firstname"), contactData.getName());
@@ -92,5 +98,17 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
-}
 
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
+    for (WebElement element : elements) {
+      String name = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      contacts.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
+    }
+    return contacts;
+  }
+
+}

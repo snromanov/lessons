@@ -1,11 +1,12 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AbonentCreationTests extends TestBase {
 
@@ -13,18 +14,16 @@ public class AbonentCreationTests extends TestBase {
   @Test
   public void contactCreationTests() {
     app.getContactHelper().Home();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().createContact(new ContactData()
-            .withName("Терьентий").withSecondname("Терьентьтев").withTelnumber("89500000000").withMail("ma@mail.ru").withGroup("test0"), true);
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    ContactData contact = new ContactData()
+            .withName("Терьентий").withSecondname("Терьентьтев").withTelnumber("89500000000").withMail("ma@mail.ru").withGroup("test0");
+    Set<ContactData> before = app.getContactHelper().all();
+    app.getContactHelper().createContact(contact, true);
+    Set<ContactData> after = app.getContactHelper().all();
+    assertThat(after.size(), equalTo(before.size() + 1));
 
-    before.add(new ContactData().withName("Терьентий").withSecondname("Терьентьтев").withTelnumber("89500000000").withMail("ma@mail.ru").withGroup("test0"));
+    contact.withId(after.stream().mapToInt((g)-> g.getId()).max().getAsInt());
+    before.add(contact);
 
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-    before.sort(byId);
-    after.sort(byId);
-
-    Assert.assertEquals(before, after);
+   // assertThat(after, equalTo(before.withAdded(contact)));//  ПОМЕНЯТЬ List на set
   }
 }
