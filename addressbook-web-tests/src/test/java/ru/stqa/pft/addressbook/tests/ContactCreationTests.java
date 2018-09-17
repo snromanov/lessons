@@ -8,7 +8,7 @@ import java.util.Set;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class AbonentCreationTests extends TestBase {
+public class ContactCreationTests extends TestBase {
 
 
   @Test

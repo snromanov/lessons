@@ -25,9 +25,6 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
   }
 
-  public void deleteContact(ContactData contact) {
-  }
-
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     typeone(By.name("firstname"), contactData.getName());
@@ -58,6 +55,24 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    deleteSelectedContact();
+    closeAlert();
+    Home();
+  }
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  public void deleteSelectedContact() {
+    wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+  }
+
+  public void closeAlert() {
+    wd.switchTo().alert().accept();
+  }
 
   public void Home() {
     click(By.linkText("home"));
