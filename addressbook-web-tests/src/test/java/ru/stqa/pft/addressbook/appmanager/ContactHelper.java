@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
   public ContactHelper(WebDriver wd) {
@@ -68,6 +66,9 @@ public class ContactHelper extends HelperBase {
 
   public void modify(ContactData contact) {
     initContactModificationById(contact.getId());
+    fillContactForm(contact, false);
+    verifityUpdate();
+    Home();
   }
 
   public void selectContactById(int id) {
@@ -79,8 +80,8 @@ public class ContactHelper extends HelperBase {
   }
 
   private void initContactModificationById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("./../../td[8]/a/img")).click();  }
-
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("./../../td[8]/a/img")).click();
+  }
 
   public void closeAlert() {
     wd.switchTo().alert().accept();
