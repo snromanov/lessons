@@ -19,6 +19,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
   private String browser;
+  private ContactHelper сontactHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -51,6 +52,10 @@ public class ApplicationManager {
 
   public GroupHelper group() {
     return groupHelper;
+  }
+
+  public ContactHelper contact() {
+    return сontactHelper;
   }
 
   public NavigationHelper goTo() {
