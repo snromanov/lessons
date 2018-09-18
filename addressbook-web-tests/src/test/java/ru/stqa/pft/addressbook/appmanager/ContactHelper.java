@@ -11,6 +11,8 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
+  private Contacts contactCache = null;
+
   public ContactHelper(WebDriver wd) {
     super(wd);
   }
@@ -19,11 +21,9 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
   }
 
-
   public void deletecontact() {
     wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
   }
-
 
   public void fillContactForm(ContactData contactData, boolean creation) {
     typeone(By.name("firstname"), contactData.getName());
@@ -37,11 +37,6 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-  }
-
-
-  public void initContactCreation() {
-    click(By.linkText("add new"));
   }
 /*
   public void closeAlertWindow() {
@@ -57,10 +52,15 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }*/
 
+  public void initContactCreation() {
+    click(By.linkText("add new"));
+  }
+
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deleteSelectedContact();
     closeAlert();
+    contactCache = null;
     Home();
   }
 
@@ -68,6 +68,7 @@ public class ContactHelper extends HelperBase {
     initContactModificationById(contact.getId());
     fillContactForm(contact, false);
     verifityUpdate();
+    contactCache = null;
     Home();
   }
 
@@ -107,13 +108,6 @@ public class ContactHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void createContact(ContactData contactData, boolean b) {
-    initContactCreation();
-    fillContactForm(contactData, b);
-    returnConcactPage();
-    Home();
-  }
-
   /*
     public int getContactCount() {
       return wd.findElements(By.name("selected[]")).size(); // вернуть размер  элемента
@@ -132,16 +126,28 @@ public class ContactHelper extends HelperBase {
       return contacts;
     }
   */
+
+  public void createContact(ContactData contactData, boolean b) {
+    initContactCreation();
+    fillContactForm(contactData, b);
+    returnConcactPage();
+    contactCache = null;
+    Home();
+  }
+
   public Contacts all() {
-    Contacts contacts = new Contacts();
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
     for (WebElement element : elements) {
       String name = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
+      contactCache.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 
 
