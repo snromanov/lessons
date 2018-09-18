@@ -72,8 +72,22 @@ public class ContactHelper extends HelperBase {
     Home();
   }
 
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withName(firstname).withSecondname(lastname).
+            withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+  }
+
   public void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+
   }
 
   public void deleteSelectedContact() {
@@ -81,7 +95,18 @@ public class ContactHelper extends HelperBase {
   }
 
   private void initContactModificationById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("./../../td[8]/a/img")).click();
+    //метод  последовательных приближений
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); //находим чекбокс
+      WebElement row = checkbox.findElement(By.xpath("./../..")); // поиск относительно чекбокс относительно текущего элемента
+      List<WebElement> cells = row.findElements(By.tagName("td"));// берём всю строку и ищем ячейку  td
+      cells.get(7).findElement(By.tagName("a")).click();// кликаем на карандаш
+
+//    wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //  ищем  с помощью xpath чекбокс и относительно него поднимаемся на два уровня вверх + ищем 8 ячейку(внутри ищем ссылку)
+//    wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
+//    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+
+
+    // до 5.8 wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("./../../td[8]/a/img")).click();
   }
 
   public void closeAlert() {
