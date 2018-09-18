@@ -32,7 +32,7 @@ public class GroupData {
     this.id = id;
     return this;
   }
-
+ 
   public GroupData withHeader(String header) {
     this.header = header;
     return this;
