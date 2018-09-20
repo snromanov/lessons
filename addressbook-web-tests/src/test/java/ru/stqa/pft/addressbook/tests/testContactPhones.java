@@ -4,8 +4,6 @@
         import org.testng.annotations.Test;
         import ru.stqa.pft.addressbook.model.ContactData;
 
-        import static org.hamcrest.CoreMatchers.equalTo;
-
 public class testContactPhones extends TestBase {
 
   @Test
@@ -14,5 +12,13 @@ public class testContactPhones extends TestBase {
     ContactData contact = app.contact().all().iterator().next(); // загружаем множество контактов
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);//выбираем какой-то контакт случайным образом
 
-    //assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-  }}
+    assertThat(contact.getHomephone(), equalTo(cleaned(contactInfoFromEditForm.getHomephone())));
+    assertThat(contact.getMobilephone(), equalTo(cleaned(contactInfoFromEditForm.getMobilePhone())));
+    assertThat(contact.getWorkphone(), equalTo(cleaned(contactInfoFromEditForm.getWorkphone())));
+  }
+  public static String cleaned(String phone) {
+
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+  }
+
+}

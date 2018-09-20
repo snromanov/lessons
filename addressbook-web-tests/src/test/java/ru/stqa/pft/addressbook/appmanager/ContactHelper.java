@@ -72,7 +72,6 @@ public class ContactHelper extends HelperBase {
     Home();
   }
 
-
   public ContactData infoFromEditForm(ContactData contact) {
     initContactModificationById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -173,6 +172,7 @@ public class ContactHelper extends HelperBase {
       contactCache.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
     }
     return new Contacts(contactCache);
+
   }
 
 
