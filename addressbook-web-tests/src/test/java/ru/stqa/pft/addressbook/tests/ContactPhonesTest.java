@@ -37,10 +37,14 @@ public class ContactPhonesTest extends TestBase {
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
   }
 
-  private Object mergePhones(ContactData contact) {
+  private String mergePhones(ContactData contact) {
+
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s)->!s.equals(""))
-            .map(ContactHelper::cleaned)
-            .collect(Collectors.joining("\n"));
+            .stream().filter((s) -> !s.equals("")).map(ContactPhonesTest::cleaned).collect(Collectors.joining("\n"));
+
+  }
+
+  public static String cleaned(String phone) {
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }
