@@ -20,10 +20,23 @@ public class NavigationHelper extends SessionHelper {
     click(By.linkText("groups"));
   }
 
-  public void gotoHome(){
+  public void contactListPage() {
     if (isElementPresent(By.id("maintable"))){
       return;
     }
     click(By.linkText("home"));
   }
-}
+
+  public void createContactPage() {
+    if (isElementPresent(By.tagName("h1"))
+            && wd.findElement(By.tagName("h1")).getText().equals("Edit / add address book entry")){
+      return;
+    }
+    click(By.linkText("add new"));
+  }
+
+
+
+
+  }
+

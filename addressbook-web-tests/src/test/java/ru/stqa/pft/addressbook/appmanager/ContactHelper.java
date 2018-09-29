@@ -1,5 +1,4 @@
 package ru.stqa.pft.addressbook.appmanager;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,20 +16,13 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void returnConcactPage() {
-    wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
-  }
-
-  public void deletecontact() {
-    wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
-  }
-
   public void fillContactForm(ContactData contactData, boolean creation) {
-    typeone(By.name("firstname"), contactData.getName());
-    typeone(By.name("lastname"), contactData.getSecondname());
-    typeone(By.name("home"), contactData.getTelnumber());
-    typeone(By.name("email"), contactData.getMail());
-
+    type(By.name("firstname"), contactData.getFirstName());
+    type(By.name("lastname"), contactData.getLastName());
+    type(By.name("middlename"), contactData.getMiddleName());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("mobile"), contactData.getMobilePhone());
+    type(By.name("email"), contactData.getEmail());
 
     if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
@@ -38,142 +30,113 @@ public class ContactHelper extends HelperBase {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
-/*
-  public void closeAlertWindow() {
-    wd.switchTo().alert().accept();
+
+
+  public void submitContactCreation() {
+    click(By.name("submit"));
   }
 
-
-  // click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")); //брать первый  из списка
-
-
- /*
-  public void selectcontact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
-  }*/
-
-  public void initContactCreation() {
-    click(By.linkText("add new"));
-  }
-
-  public void delete(ContactData contact) {
-    selectContactById(contact.getId());
-    deleteSelectedContact();
-    closeAlert();
-    contactCache = null;
-    Home();
-  }
-
-  public void modify(ContactData contact) {
-    initContactModificationById(contact.getId());
-    fillContactForm(contact, false);
-    verifityUpdate();
-    contactCache = null;
-    Home();
-  }
-
-  public ContactData infoFromEditForm(ContactData contact) {
-    initContactModificationById(contact.getId());
-    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
-    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
-    String home = wd.findElement(By.name("home")).getAttribute("value");
-    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
-    String work = wd.findElement(By.name("work")).getAttribute("value");
-    wd.navigate().back();
-    return new ContactData().withId(contact.getId()).withName(firstname).withSecondname(lastname).
-            withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+  public void selectContact(int k) {
+    wd.findElements(By.name("selected[]")).get(k).click();
   }
 
   public void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
-
+    wd.findElement(By.xpath("//input[@value = '"+id+"']")).click();
   }
 
   public void deleteSelectedContact() {
-    wd.findElement(By.xpath("//div[@id='content']/form[2]/div[2]/input")).click();
+    click(By.xpath("//input[@value = 'Delete']"));
   }
 
-  private void initContactModificationById(int id) {
-    //метод  последовательных приближений
-    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id))); //находим чекбокс
-      WebElement row = checkbox.findElement(By.xpath("./../..")); // поиск относительно чекбокс относительно текущего элемента
-      List<WebElement> cells = row.findElements(By.tagName("td"));// берём всю строку и ищем ячейку  td
-      cells.get(7).findElement(By.tagName("a")).click();// кликаем на карандаш
-
-//    wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click(); //  ищем  с помощью xpath чекбокс и относительно него поднимаемся на два уровня вверх + ищем 8 ячейку(внутри ищем ссылку)
-//    wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
-//    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
-
-
-    // до 5.8 wd.findElement(By.cssSelector("input[value='" + id + "']")).findElement(By.xpath("./../../td[8]/a/img")).click();
-  }
-
-  public void closeAlert() {
+  public void acceptDeleteContact() {
     wd.switchTo().alert().accept();
   }
 
-  public void Home() {
-    click(By.linkText("home"));
-  }
-
-  public void initContactModification(int index) {
-    wd.findElements(By.cssSelector("img[alt='Edit']")).get(index).click();
+  public void editContact(int id) {
+    wd.findElement(By.xpath("//a[@href ='edit.php?id="+id+"'] ")).click();
   }
 
   public void submitContactModification() {
     click(By.name("update"));
   }
 
-  public void verifityUpdate() {
-    click(By.xpath("//div[@id='content']/form[1]/input[22]"));
-  }
-
-  public boolean isThereAContact() {
-    return isElementPresent(By.name("selected[]"));
-  }
-
-
-    public int count() {
-      return wd.findElements(By.name("selected[]")).size(); // вернуть размер  элемента
-    }
-
-    /*
-    public List<ContactData> getContactList() {
-      List<ContactData> contacts = new ArrayList<ContactData>();
-      List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
-      for (WebElement element : elements) {
-        String name = element.findElement(By.xpath(".//td[3]")).getText();
-        String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-        int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-        contacts.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
-      }
-      return contacts;
-    }
-  */
-
-  public void createContact(ContactData contactData, boolean b) {
-    initContactCreation();
-    fillContactForm(contactData, b);
-    returnConcactPage();
+  public void create(ContactData contactData) {
+    fillContactForm(contactData, true);
+    submitContactCreation();
     contactCache = null;
-    Home();
   }
+  public void modify(int id, ContactData contact) {
+    editContact(id);
+    fillContactForm(contact,false);
+    submitContactModification();
+    contactCache = null;
+  }
+  public void delete(ContactData contast) {
+    selectContactById(contast.getId());
+    deleteSelectedContact();
+    contactCache = null;
+    acceptDeleteContact();
+  }
+
+
+
 
   public Contacts all() {
     if (contactCache != null) {
       return new Contacts(contactCache);
     }
-    contactCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name = 'entry']"));
-    for (WebElement element : elements) {
-      String name = element.findElement(By.xpath(".//td[3]")).getText();
-      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactCache.add(new ContactData().withId(id).withName(name).withSecondname(lastname));
+    Contacts contactCache = new Contacts();
+    WebElement table = wd.findElement(By.id("maintable"));
+    List<WebElement> allRows = table.findElements(By.xpath("//tr[@name = 'entry']"));
+    for (WebElement row : allRows){
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id  = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+
+      ContactData contact = new ContactData()
+              .withId(id)
+              .withLastName(cells.get(1).getText())
+              .withFirstName(cells.get(2).getText())
+              .withAddress(cells.get(3).getText())
+              .withAllEmails(cells.get(4).getText())
+              .withAllPhone(cells.get(5).getText());
+
+      contactCache.add(contact);
     }
     return new Contacts(contactCache);
-
   }
 
 
+  public int count() {
+    return wd.findElements(By.xpath("//tr[@name = 'entry']")).size();
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    editContact(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getText();
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData()
+            .withId(contact.getId())
+            .withFirstName(firstname)
+            .withLastName(lastname)
+            .withMiddleName(middlename)
+            .withAddress(address)
+            .withEmail1(email)
+            .withEmail2(email2)
+            .withEmail3(email3)
+            .withHomePhone(home)
+            .withMobilePhone(mobile)
+            .withWorkPhone(work);
+  }
+  public static String cleaned(String phone){
+    return phone.replaceAll("\\s", "").replaceAll("[-()]","");
+  }
 }
