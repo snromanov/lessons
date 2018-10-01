@@ -1,0 +1,41 @@
+<list>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstName>fName 0</firstName>
+    <lastName>lName 0</lastName>
+    <middleName>mName 0</middleName>
+    <address>address, address, address 0</address>
+    <homePhone>6540000</homePhone>
+    <mobilePhone>70000000000</mobilePhone>
+    <workPhone>80000000000</workPhone>
+    <email>Email1@test.ru0</email>
+    <email2>Email2@test.ru0</email2>
+    <email3>Email3@test.ru0</email3>
+    <group>test 0</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstName>fName 1</firstName>
+    <lastName>lName 1</lastName>
+    <middleName>mName 1</middleName>
+    <address>address, address, address 1</address>
+    <homePhone>6540001</homePhone>
+    <mobilePhone>70000000001</mobilePhone>
+    <workPhone>80000000001</workPhone>
+    <email>Email1@test.ru1</email>
+    <email2>Email2@test.ru1</email2>
+    <email3>Email3@test.ru1</email3>
+    <group>test 0</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+  <ru.stqa.pft.addressbook.model.ContactData>
+    <firstName>fName 2</firstName>
+    <lastName>lName 2</lastName>
+    <middleName>mName 2</middleName>
+    <address>address, address, address 2</address>
+    <homePhone>6540002</homePhone>
+    <mobilePhone>70000000002</mobilePhone>
+    <workPhone>80000000002</workPhone>
+    <email>Email1@test.ru2</email>
+    <email2>Email2@test.ru2</email2>
+    <email3>Email3@test.ru2</email3>
+    <group>test 0</group>
+  </ru.stqa.pft.addressbook.model.ContactData>
+</list>
