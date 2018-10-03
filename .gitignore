@@ -18,3 +18,4 @@ gradle-app.setting
 **/.gradle/
 **/*.iml
 **/build/
+*.log
