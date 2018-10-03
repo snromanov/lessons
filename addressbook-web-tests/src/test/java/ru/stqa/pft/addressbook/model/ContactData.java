@@ -4,41 +4,70 @@ package ru.stqa.pft.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 
 
-public class ContactData {
-  @XStreamOmitField
-  private int id = Integer.MAX_VALUE;
-  @Expose
-  private String firstName;
-  @Expose
-  private String lastName;
-  @Expose
-  private String middleName;
-  @Expose
-  private String address;
-  @Expose
-  private String homePhone;
-  private String allPhones;
-  @Expose
-  private String mobilePhone;
-  @Expose
-  private String workPhone;
-  private String allEmails;
-  @Expose
-  private String email;
-  @Expose
-  private String email2;
-  @Expose
-  private String email3;
-  private String year;
-  private String group;
-  private File photo;
+@Entity
+@Table(name = "addressbook")
+public  class ContactData {
 
-  public ContactData() {
-  }
+  @Id
+  @Column(name = "id")
+  private int id;
+
+  @Column(name = "firstname")
+  private String firstName;
+
+  @Column(name = "lastname")
+  private String lastName;
+
+  @Column(name = "middlename")
+  private String middleName;
+
+
+  @Column(name = "address")
+
+  @Type(type = "text")
+  private String address;
+
+
+  @Column(name = "home")
+
+  @Type(type = "text")
+  private String homePhone;
+
+  @Transient
+  private String allPhones;
+
+  @Column(name = "mobile")
+  @Type(type = "text")
+  private String mobilePhone;
+
+  @Column(name = "work")
+  @Type(type = "text")
+  private String workPhone;
+  @Transient
+  private String allEmails;
+
+  @Column(name = "email")
+  @Type(type = "text")
+  private String email;
+
+  @Column(name = "email2")
+  @Type(type = "text")
+  private String email2;
+
+  @Column(name = "email3")
+  @Type(type = "text")
+  private String email3;
+  @Transient
+  private String year;
+  @Transient
+  private String group;
+
 
   public ContactData withId(int id) {
     this.id = id;
@@ -204,14 +233,14 @@ public class ContactData {
     return result;
   }
 
-  public File getPhoto() {
+  /*public File getPhoto() {
     return photo;
   }
 
   public ContactData withPhoto(File photo) {
     this.photo = photo;
     return this;
-  }
+  }*/
 }
 
 
