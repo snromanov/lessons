@@ -22,6 +22,23 @@ public class GroupData {
   @Id
   @Column(name = "group_id")
   private int id = Integer.MAX_VALUE;
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    GroupData groupData = (GroupData) o;
+    return id == groupData.id &&
+            Objects.equals(header, groupData.header) &&
+            Objects.equals(body, groupData.body) &&
+            Objects.equals(footer, groupData.footer);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, header, body, footer);
+  }
+
   @Expose
   @Column(name = "group_name")
   private String header;
@@ -34,22 +51,7 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
-/* fluent  удаляем
-  public GroupData(String header, String body, String footer) {
-    this.id = Integer.MAX_VALUE;
-    this.header = header;
-    this.body = body;
-    this.footer = footer;
-  }
 
-
-  public GroupData(int id, String header, String body, String footer) {
-    this.id = id;
-    this.header = header;
-    this.body = body;
-    this.footer = footer;
-  }
-*/
   public int getId() {
     return id;
   }
@@ -94,20 +96,7 @@ public class GroupData {
             '}';
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    GroupData groupData = (GroupData) o;
-    return id == groupData.id &&
-            Objects.equals(header, groupData.header);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, header);
-  }
-/*
+  /*
   private  String header;
   private  String body;
   private  String footer;
