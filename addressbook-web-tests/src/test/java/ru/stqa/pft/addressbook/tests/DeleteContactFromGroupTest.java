@@ -1,24 +1,31 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class ContactDeletionTests extends TestBase {
+public class DeleteContactFromGroupTest extends TestBase {
 
   @BeforeMethod
+
+
   public void ensurePreconditions() {
-    app.goTo().contactListPage();
+    if (app.db().groups().size() == 0) {
+      app.goTo().GroupPage();
+      app.group().create(new GroupData().withName("test8"));
+    }
     if (app.db().contacts().size() == 0) {
-      app.goTo().createContactPage();
       Groups groups = app.db().groups();
+      app.goTo().createContactPage();
       app.contact().createWithoutGroup(new ContactData().withFirstName("testFirstName")
               .withLastName("testLastName")
               .withMiddleName("testMiddleName")
@@ -31,18 +38,17 @@ public class ContactDeletionTests extends TestBase {
   }
 
   @Test
-  public void testContractDeletion(){
+  public void testDeleteContactFromGroup() {
+    int groupId = app.db().groupsWithContacts().iterator().next().getId();
     app.goTo().contactListPage();
-    Contacts before = app.db().contacts();
-    ContactData deletedContact = before.iterator().next();
-    app.contact().delete(deletedContact);
-    app.goTo().contactListPage();
-    Assert.assertEquals(app.contact().count(), before.size() - 1);
-    Contacts after = app.db().contacts();
-    assertThat(after, equalTo(before.without(deletedContact)));
-    verifyContactListInUI();
+    app.contact().selectGroup(groupId);
+    int contactId = app.contact().all().iterator().next().getId();
+    app.contact().selectContactById(contactId);
+    app.contact().deleteSelectedContact();
+
+    Groups groups = app.db().loadContactById(contactId).getGroups();
+    Optional<Integer> optionalGroupId = groups.stream().map(GroupData::getId).filter((id) -> id == groupId).findFirst();
+    assertThat(true, equalTo(optionalGroupId.isPresent()));
   }
 }
-
-
 

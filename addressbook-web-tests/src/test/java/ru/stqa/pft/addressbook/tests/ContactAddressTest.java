@@ -13,14 +13,13 @@ public class ContactAddressTest extends TestBase {
     app.goTo().contactListPage();
     if (app.db().contacts().size() == 0){
       app.goTo().createContactPage();
-      app.contact().create(new ContactData().withFirstName("testFirstName")
+      app.contact().createWithoutGroup(new ContactData().withFirstName("testFirstName")
               .withLastName("testLastName")
               .withMiddleName("testMiddleName")
               .withAddress("testAddressString")
               .withMiddleName("79991001010")
               .withEmail1("tests@tests.ru")
-              .withYear("1999")
-              .withGroup("test1"));
+              .withYear("1999"));
     }
   }
   @Test

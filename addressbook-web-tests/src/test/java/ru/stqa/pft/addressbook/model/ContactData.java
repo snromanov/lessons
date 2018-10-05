@@ -1,12 +1,15 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import  com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
@@ -59,8 +62,11 @@ public final class ContactData {
   private String email3;
   @Transient
   private String year;
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns=@JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
 
 
@@ -133,9 +139,8 @@ public final class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
+  public Groups getGroups() {
+    return new  Groups(groups);
   }
 
   public ContactData withAllPhone(String allPhones) {
@@ -193,8 +198,6 @@ public final class ContactData {
     return year;
   }
 
-  public String getGroup() { return group; }
-
   public String getAllPhones() {
     return allPhones;
   }
@@ -235,5 +238,10 @@ public final class ContactData {
     result = 31 * result + (mobilePhone != null ? mobilePhone.hashCode() : 0);
     result = 31 * result + (email != null ? email.hashCode() : 0);
     return result;
+  }
+
+  public ContactData inGroups(GroupData next) {
+    groups.add(next);
+    return this;
   }
 }

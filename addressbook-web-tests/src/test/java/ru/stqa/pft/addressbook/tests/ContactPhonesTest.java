@@ -4,6 +4,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.appmanager.ContactHelper;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -17,15 +18,16 @@ public class ContactPhonesTest extends TestBase {
   public void ensurePreconditions() {
     app.goTo().contactListPage();
     if (app.db().contacts().size() == 0){
+      Groups groups = app.db().groups();
       app.goTo().createContactPage();
-      app.contact().create(new ContactData().withFirstName("testFirstName")
+      app.contact().createWithoutGroup(new ContactData().withFirstName("testFirstName")
               .withLastName("testLastName")
               .withMiddleName("testMiddleName")
               .withAddress("testAddressString")
               .withMiddleName("79991001010")
               .withEmail1("tests@tests.ru")
               .withYear("1999")
-              .withGroup("test1"));
+              .inGroups(groups.iterator().next()));
     }
   }
 

@@ -1,5 +1,4 @@
 package ru.stqa.pft.addressbook.generators;
-
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
@@ -7,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -43,17 +43,17 @@ public class ContactDataGenerator {
 
   private void run() throws IOException {
     List<ContactData> contacts = generateContacts(count);
-    if (format.equals("csv")){
+    if (format.equals("csv")) {
       saveAsCsv(contacts, new File(file));
-    } else if (format.equals("xml")) {
+    } else if (format.equals("xml")){
       saveAsXml(contacts, new File(file));
-    } else if (format.equals("json")) {
+    } else if (format.equals("json")){
       saveAsJson(contacts, new File(file));
     } else {
-      System.out.println("Unrecognized format" + format);
+      System.out.println("Unrecognized format " + format);
     }
-
   }
+
   private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     String json = gson.toJson(contacts);
@@ -74,7 +74,7 @@ public class ContactDataGenerator {
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (ContactData contact: contacts) {
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
+      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n",
               contact.getFirstName(),
               contact.getMiddleName(),
               contact.getLastName(),
@@ -84,13 +84,13 @@ public class ContactDataGenerator {
               contact.getWorkPhone(),
               contact.getEmail(),
               contact.getEmail2(),
-              contact.getEmail3(),
-              contact.getGroup()));
+              contact.getEmail3()));
     }
     writer.close();
   }
 
   private List<ContactData> generateContacts(int count) {
+
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 0; i < count; i++) {
       contacts.add((new ContactData()
@@ -103,9 +103,9 @@ public class ContactDataGenerator {
               .withWorkPhone(String.format("8000000000%s", i))
               .withEmail1(String.format("Email1@test.ru%s", i))
               .withEmail2(String.format("Email2@test.ru%s", i))
-              .withEmail3(String.format("Email3@test.ru%s", i))
-              .withGroup(String.format("test 0"))
-      ));
+              .withEmail3(String.format("Email3@test.ru%s", i))));
+             // .inGroups(groups.iterator().next())));
+
 
     }
     return contacts;
