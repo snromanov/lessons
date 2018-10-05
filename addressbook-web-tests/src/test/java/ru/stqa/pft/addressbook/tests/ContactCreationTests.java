@@ -69,7 +69,7 @@ public class ContactCreationTests extends TestBase {
     app.goTo().contactListPage();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
-
+    verifyContactListInUI();
 
   }
 
@@ -80,5 +80,6 @@ public class ContactCreationTests extends TestBase {
     File photo = new File ("src/test/resources/123.jpg");
     System.out.println(photo.getAbsolutePath());
     System.out.println(photo.exists());
+    verifyContactListInUI();
   }
 }

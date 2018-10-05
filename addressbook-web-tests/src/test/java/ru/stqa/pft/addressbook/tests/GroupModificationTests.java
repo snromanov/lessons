@@ -7,7 +7,6 @@ import ru.stqa.pft.addressbook.model.Groups;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class GroupModificationTests extends TestBase {
 
@@ -33,5 +32,8 @@ if (app.db().groups().size()==0 )
     assertThat(app.group().count(), equalTo(before.size()));
      Groups after = app.db().groups();
     assertThat(after, equalTo(before.without(modifiGroup).withAdded(group)));
+    verifyGroupListInUI();
   }
+
+
 }
