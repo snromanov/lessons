@@ -23,6 +23,8 @@ public class ApplicationManager {
   private MailHelper mailHelper;
   private WebHelper webHelper;
   private HelperBase base;
+  private SoapHelper soap;
+
 
   public ApplicationManager(String browser) {
     properties = new Properties();
@@ -32,9 +34,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
   }
-
 
   public void stop() {
     if (wd != null){
@@ -79,6 +79,14 @@ public class ApplicationManager {
     }
     return ftp;
   }
+  public  SoapHelper soap() {
+    if (soap == null) {
+      soap = new SoapHelper(this);
+    }
+    return soap;
+  }
+
+
 
   public WebDriver getDriver() {
     if (wd == null){
@@ -99,5 +107,13 @@ public class ApplicationManager {
       mailHelper = new MailHelper(this);
     }
     return mailHelper;
+  }
+
+  public String getAdminLogin() {
+    return getProperty("web.adminLogin");
+  }
+
+  public String getAdminPassword() {
+    return getProperty("web.adminPassword");
   }
 }
