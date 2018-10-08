@@ -22,17 +22,16 @@ public class HelperBase {
     click(locator);
     if (text != null) {
       String existingText = wd.findElement(locator).getAttribute("value");
-      if(! text.equals(existingText)) {
+      if (!text.equals(existingText)) {
         wd.findElement(locator).click();
         wd.findElement(locator).sendKeys(text);
       }
     }
   }
-  protected void  attach(By locator, File file) {
-    if(file != null) {
+
+  protected void attach(By locator, File file) {
+    if (file != null) {
       wd.findElement(locator).sendKeys((file.getAbsolutePath()));
     }
   }
-
-
 }
